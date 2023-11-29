@@ -11,6 +11,7 @@ export interface ContentTypes {
 export interface EditorPropsTypes {
   content: Array<ContentTypes>;
   actions: { [name: string]: any };
+  presences: any;
 }
 
 export type ChangeEventHandler = (

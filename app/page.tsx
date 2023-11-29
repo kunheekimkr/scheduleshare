@@ -159,7 +159,12 @@ export default function Home() {
         <>
           <DisplayPeerList presences={presences} myClientID={myClientID} />
           <div className="clear-both"></div>
-          <Scheduler content={content} actions={actions} />
+          <hr className="py-2" />
+          <Scheduler
+            content={content}
+            actions={actions}
+            presences={presences}
+          />
         </>
       ) : null}
     </main>
