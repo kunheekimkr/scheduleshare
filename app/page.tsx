@@ -39,10 +39,17 @@ const customModalStyles: ReactModal.Styles = {
   },
 };
 
-const documentKey = `next.js-Scheduler-${parseDate(new Date())}`;
+const defaultContent: Array<ContentTypes> = [
+  {
+    date: parseDate(new Date()),
+    selectedBlocks: Array(48).fill(false),
+  },
+];
+
+const documentKey = `scheduleshare`;
 
 export default function Home() {
-  const [content, setContent] = useState<Array<ContentTypes>>([]);
+  const [content, setContent] = useState<Array<ContentTypes>>(defaultContent);
   const [modalIsOpen, setModalIsOpen] = useState(true);
   const [userName, setUserName] = useState("");
   const [myClientID, setMyClientID] = useState<any>();
@@ -54,9 +61,9 @@ export default function Home() {
   );
 
   const actions = {
-    addContent(date: string, text: string) {
+    addContent(date: string, selectedBlocks: boolean[]) {
       doc.update((root) => {
-        root.content.push({ date, text });
+        root.content.push({ date, selectedBlocks });
       });
     },
 
@@ -76,7 +83,7 @@ export default function Home() {
       });
     },
 
-    updateContent(date: string, text: string) {
+    updateContent(date: string, selectedBlocks: boolean[]) {
       doc.update((root) => {
         let target;
         for (const item of root.content) {
@@ -87,7 +94,7 @@ export default function Home() {
         }
 
         if (target) {
-          target.text = text;
+          target.selectedBlocks = selectedBlocks;
         }
       });
     },
@@ -126,6 +133,14 @@ export default function Home() {
           userName: userName,
         },
       });
+
+      // 03. create default content if not exists.
+      doc.update((root) => {
+        if (!root.content) {
+          root.content = defaultContent;
+        }
+        console.log(root.content);
+      }, "create default content if not exists");
 
       // 04. subscribe doc's change event from local and remote.
       doc.subscribe((event) => {

@@ -5,7 +5,7 @@ export interface ENVtypes {
 
 export interface ContentTypes {
   date: string;
-  text: string;
+  selectedBlocks: Array<boolean>;
 }
 
 export interface EditorPropsTypes {

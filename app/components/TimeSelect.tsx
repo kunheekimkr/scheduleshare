@@ -8,6 +8,14 @@ interface TimeBlockProps {
   onMouseEnter: () => void;
 }
 
+interface TimeSelectProps {
+  selectedBlocks: boolean[];
+  setSelectedBlocks: React.Dispatch<React.SetStateAction<boolean[]>>;
+  actions: { [name: string]: any };
+  presences: any;
+  date: string;
+}
+
 const TimeBlock: React.FC<TimeBlockProps> = ({
   selected,
   onClick,
@@ -30,10 +38,8 @@ const TimeBlock: React.FC<TimeBlockProps> = ({
   );
 };
 
-const TimeSelect: React.FC = () => {
-  const [selectedBlocks, setSelectedBlocks] = React.useState<boolean[]>(
-    Array(48).fill(false)
-  );
+const TimeSelect: React.FC<TimeSelectProps> = (props) => {
+  const { selectedBlocks, setSelectedBlocks, actions, presences, date } = props;
   const [isSelecting, setIsSelecting] = React.useState<boolean>(false);
   const initialIndexRef = React.useRef<number>(-1);
 
@@ -41,6 +47,7 @@ const TimeSelect: React.FC = () => {
     const newSelectedBlocks = [...selectedBlocks];
     newSelectedBlocks[index] = !newSelectedBlocks[index];
     setSelectedBlocks(newSelectedBlocks);
+    actions.updateContent(date, newSelectedBlocks);
   };
 
   const handleMouseDown = (index: number) => {
@@ -66,6 +73,7 @@ const TimeSelect: React.FC = () => {
       }
 
       setSelectedBlocks(newSelectedBlocks);
+      actions.updateContent(date, newSelectedBlocks);
     }
   };
 
@@ -106,6 +114,7 @@ const TimeSelect: React.FC = () => {
         }}
         onClick={() => {
           setSelectedBlocks(Array(48).fill(false));
+          actions.updateContent(date, Array(48).fill(false));
         }}
       >
         clear

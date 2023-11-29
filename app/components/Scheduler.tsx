@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 
 import { EditorPropsTypes, CalendarValue } from "../utils/types";
 import { parseDate } from "../utils/parseDate";
@@ -16,21 +16,24 @@ export default function Scheduler(props: EditorPropsTypes) {
   const [date, onChange] = useState<CalendarValue>(new Date());
   const [userNames, setUserNames] = useState<Array<string>>([]);
   const currentDate = date ? parseDate(new Date(date.toString())) : "";
+  const [selectedBlocks, setSelectedBlocks] = React.useState<boolean[]>(
+    Array(48).fill(false)
+  );
 
   useEffect(() => {
-    // Check if props.presences is an array
-    if (Array.isArray(presences)) {
-      // Now you can safely use map
-      let transformed = presences.reduce((result, item) => {
-        const { clientID, presence } = item;
-        const { userName } = presence;
-        result[clientID] = userName;
-        return result;
-      }, {});
-      setUserNames(Object.values(transformed));
-    }
-  }, [presences]);
+    let flag = false;
+    content.forEach((item) => {
+      if (item.date === currentDate) {
+        flag = !flag;
+        return 0;
+      }
+    });
 
+    let data = flag
+      ? content.find((item) => item.date === currentDate)!.selectedBlocks
+      : Array(48).fill(false);
+    setSelectedBlocks(data);
+  }, [date, content]);
   return (
     <div className="flex  p-4">
       <article className="flex items-center justify-evenly w-full">
@@ -44,7 +47,13 @@ export default function Scheduler(props: EditorPropsTypes) {
           }
         />
         <div className="items-center">
-          <TimeSelect />
+          <TimeSelect
+            selectedBlocks={selectedBlocks}
+            setSelectedBlocks={setSelectedBlocks}
+            actions={actions}
+            date={currentDate}
+            presences={presences}
+          />
         </div>
       </article>
     </div>
