@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/TimeSelect.css"; // You can create a CSS file for styling
 
 interface TimeBlockProps {
   selected: boolean;
@@ -28,7 +27,7 @@ const TimeBlock: React.FC<TimeBlockProps> = ({
 
   return (
     <div
-      className="time-block"
+      className="h-5 text-center cursor-pointer w-12 leading-8 select-none border border-sold border-black hover:bg-gray-200"
       style={blockStyle}
       onMouseDown={onMouseDown}
       onMouseEnter={onMouseEnter}
@@ -98,27 +97,42 @@ const TimeSelect: React.FC<TimeSelectProps> = (props) => {
     return blocks;
   };
 
+  const generateTimeText = () => {
+    const timeText: JSX.Element[] = [];
+    for (let i = 0; i < 49; i++) {
+      timeText.push(
+        <div className="text-xs text-white h-5 align-top " key={i}>
+          {i % 2 == 0 ? `${i / 2}:00` : ``}
+        </div>
+      );
+    }
+    return timeText;
+  };
+
   return (
-    <div>
-      <div className="time-select" onMouseUp={handleMouseUp}>
-        {generateTimeBlocks()}
+    <div className="flex">
+      <div className="w-1/4">{generateTimeText()}</div>
+      <div className="w-3/4 ml-4">
+        <div className="flex flex-col w-full" onMouseUp={handleMouseUp}>
+          {generateTimeBlocks()}
+        </div>
+        <br />
+        <button
+          type="button"
+          style={{
+            backgroundColor: "red",
+            width: "50px",
+            height: "20px",
+            color: "white",
+          }}
+          onClick={() => {
+            setSelectedBlocks(Array(48).fill(false));
+            actions.updateContent(date, Array(48).fill(false));
+          }}
+        >
+          clear
+        </button>
       </div>
-      <br />
-      <button
-        type="button"
-        style={{
-          backgroundColor: "red",
-          width: "50px",
-          height: "20px",
-          color: "white",
-        }}
-        onClick={() => {
-          setSelectedBlocks(Array(48).fill(false));
-          actions.updateContent(date, Array(48).fill(false));
-        }}
-      >
-        clear
-      </button>
     </div>
   );
 };

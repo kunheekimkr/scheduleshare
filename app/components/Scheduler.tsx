@@ -6,6 +6,7 @@ import { EditorPropsTypes, CalendarValue } from "../utils/types";
 import { parseDate } from "../utils/parseDate";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import "../styles/calendar.css";
 import TimeSelect from "./TimeSelect";
 
 /**
@@ -28,13 +29,15 @@ export default function Scheduler(props: EditorPropsTypes) {
         return 0;
       }
     });
-
-    let data = flag
-      ? content
+    if (flag) {
+      setSelectedBlocks(
+        content
           .find((item) => item.date === currentDate)!
-          .selectedBlocks.slice() //deepcopy
-      : Array(48).fill(false);
-    setSelectedBlocks(data);
+          .selectedBlocks.slice()
+      );
+    } else {
+      actions.addContent(currentDate, Array(48).fill(false));
+    }
   }, [date, content]);
   return (
     <div className="flex  p-4">
@@ -46,6 +49,15 @@ export default function Scheduler(props: EditorPropsTypes) {
           showNeighboringMonth={false}
           formatDay={(locale, date) =>
             date.toLocaleString("en", { day: "numeric" })
+          }
+          tileClassName={({ date }) =>
+            content.find(
+              (item) =>
+                item.date === parseDate(date) &&
+                item.selectedBlocks.includes(true)
+            )
+              ? "highlight"
+              : ""
           }
         />
         <div className="items-center">
