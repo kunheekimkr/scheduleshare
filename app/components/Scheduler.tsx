@@ -30,7 +30,9 @@ export default function Scheduler(props: EditorPropsTypes) {
     });
 
     let data = flag
-      ? content.find((item) => item.date === currentDate)!.selectedBlocks
+      ? content
+          .find((item) => item.date === currentDate)!
+          .selectedBlocks.slice() //deepcopy
       : Array(48).fill(false);
     setSelectedBlocks(data);
   }, [date, content]);

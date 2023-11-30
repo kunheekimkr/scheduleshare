@@ -139,7 +139,6 @@ export default function Home() {
         if (!root.content) {
           root.content = defaultContent;
         }
-        console.log(root.content);
       }, "create default content if not exists");
 
       // 04. subscribe doc's change event from local and remote.
