@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 
 import { EditorPropsTypes, CalendarValue } from "../utils/types";
 import { parseDate } from "../utils/parseDate";
@@ -15,7 +15,6 @@ import TimeSelect from "./TimeSelect";
 export default function Scheduler(props: EditorPropsTypes) {
   const { content, actions, presences } = props;
   const [date, onChange] = useState<CalendarValue>(new Date());
-  const [userNames, setUserNames] = useState<Array<string>>([]);
   const currentDate = date ? parseDate(new Date(date.toString())) : "";
   const [selectedBlocks, setSelectedBlocks] = React.useState<boolean[]>(
     Array(48).fill(false)
@@ -66,7 +65,6 @@ export default function Scheduler(props: EditorPropsTypes) {
             setSelectedBlocks={setSelectedBlocks}
             actions={actions}
             date={currentDate}
-            presences={presences}
           />
         </div>
       </article>

@@ -24,7 +24,7 @@ const TimeBlock: React.FC<TimeBlockProps> = ({
 };
 
 const TimeSelect: React.FC<TimeSelectProps> = (props) => {
-  const { selectedBlocks, setSelectedBlocks, actions, presences, date } = props;
+  const { selectedBlocks, setSelectedBlocks, actions, date } = props;
   const [isSelecting, setIsSelecting] = React.useState<boolean>(false);
   const initialIndexRef = React.useRef<number>(-1);
 

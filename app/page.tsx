@@ -1,6 +1,6 @@
 "use client";
 import yorkie, { Document, JSONArray, DocEventType } from "yorkie-js-sdk";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ContentTypes, ENVtypes } from "./utils/types";
 import { parseDate } from "./utils/parseDate";
 import ReactModal from "react-modal";
@@ -177,7 +177,7 @@ export default function Home() {
         isOpen={modalIsOpen}
         userName={userName}
         handleUsernameInput={handleUsernameInput}
-        onModalSubmit={handleModalSubmit}
+        handleModalSubmit={handleModalSubmit}
       />
       {!modalIsOpen ? (
         <>

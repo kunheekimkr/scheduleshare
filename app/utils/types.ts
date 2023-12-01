@@ -30,7 +30,6 @@ export interface TimeSelectProps {
   selectedBlocks: boolean[];
   setSelectedBlocks: React.Dispatch<React.SetStateAction<boolean[]>>;
   actions: { [name: string]: any };
-  presences: any;
   date: string;
 }
 
@@ -38,7 +37,7 @@ export interface CustomModalProps {
   isOpen: boolean;
   userName: string;
   handleUsernameInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onModalSubmit: (isModalOpen: boolean) => void;
+  handleModalSubmit: () => void;
 }
 
 export type ChangeEventHandler = (

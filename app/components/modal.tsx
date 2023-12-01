@@ -1,12 +1,12 @@
 import ReactModal from "react-modal";
-import React, { useState } from "react";
+import React from "react";
 import { CustomModalProps } from "../utils/types";
 
 export default function CustomModal(props: CustomModalProps) {
-  const { onModalSubmit, isOpen, userName, handleUsernameInput } = props;
+  const { handleModalSubmit, isOpen, userName, handleUsernameInput } = props;
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onModalSubmit(true);
+    handleModalSubmit();
   };
 
   return (
