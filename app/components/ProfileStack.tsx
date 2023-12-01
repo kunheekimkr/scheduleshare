@@ -1,11 +1,12 @@
 import Image from "next/image.js";
 import React, { useState, useEffect } from "react";
 import "../styles/style.css";
-import { ProfileStackProps } from "../utils/types";
+import { ProfileStackProps, CreatePeerProps } from "../utils/types";
 
 const MAX_PEER_VIEW = 4;
 
-const createPeer = (name: string, type: string) => {
+const createPeer = (props: CreatePeerProps) => {
+  const { name, type } = props;
   if (type == "main")
     return (
       <div className="peer">
@@ -62,13 +63,13 @@ export default function ProfileStack(props: ProfileStackProps) {
 
   let peerList = [];
   let peerMoreList = [];
-  peerList.push(createPeer(userName, "main"));
+  peerList.push(createPeer({ name: userName, type: "main" }));
   if (hasMorePeers) {
     // list of jsx elements
-    peerList.push(createPeer(otherUserNames[0], "main"));
-    peerList.push(createPeer(otherUserNames[1], "main"));
+    peerList.push(createPeer({ name: otherUserNames[0], type: "main" }));
+    peerList.push(createPeer({ name: otherUserNames[1], type: "main" }));
     for (let i = 2; i < otherUserNames.length; i++) {
-      peerMoreList.push(createPeer(otherUserNames[i], "other"));
+      peerMoreList.push(createPeer({ name: otherUserNames[i], type: "other" }));
     }
     peerList.push(
       <div className="peer more">
@@ -78,7 +79,7 @@ export default function ProfileStack(props: ProfileStackProps) {
     );
   } else {
     for (let i = 0; i < otherUserNames.length; i++) {
-      peerList.push(createPeer(otherUserNames[i], "main"));
+      peerList.push(createPeer({ name: otherUserNames[i], type: "main" }));
     }
   }
 

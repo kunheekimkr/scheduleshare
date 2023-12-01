@@ -1,13 +1,9 @@
-import React from "react";
+import React, { useState, useRef, CSSProperties } from "react";
 import { TimeBlockProps, TimeSelectProps } from "../utils/types";
 
-const TimeBlock: React.FC<TimeBlockProps> = ({
-  selected,
-  onClick,
-  onMouseDown,
-  onMouseEnter,
-}) => {
-  const blockStyle: React.CSSProperties = selected
+function TimeBlock(props: TimeBlockProps) {
+  const { selected, onClick, onMouseDown, onMouseEnter } = props;
+  const blockStyle: CSSProperties = selected
     ? { backgroundColor: "green" }
     : {};
 
@@ -21,12 +17,12 @@ const TimeBlock: React.FC<TimeBlockProps> = ({
       <button type="button" onClick={onClick} style={{ display: "none" }} />
     </div>
   );
-};
+}
 
-const TimeSelect: React.FC<TimeSelectProps> = (props) => {
+export default function TimeSelect(props: TimeSelectProps) {
   const { selectedBlocks, setSelectedBlocks, actions, date } = props;
-  const [isSelecting, setIsSelecting] = React.useState<boolean>(false);
-  const initialIndexRef = React.useRef<number>(-1);
+  const [isSelecting, setIsSelecting] = useState<boolean>(false);
+  const initialIndexRef = useRef<number>(-1);
 
   const handleBlockClick = (index: number) => {
     const newSelectedBlocks = [...selectedBlocks];
@@ -121,6 +117,4 @@ const TimeSelect: React.FC<TimeSelectProps> = (props) => {
       </div>
     </div>
   );
-};
-
-export default TimeSelect;
+}

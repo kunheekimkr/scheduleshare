@@ -16,7 +16,7 @@ export default function Scheduler(props: EditorPropsTypes) {
   const { content, actions, presences } = props;
   const [date, onChange] = useState<CalendarValue>(new Date());
   const currentDate = date ? parseDate(new Date(date.toString())) : "";
-  const [selectedBlocks, setSelectedBlocks] = React.useState<boolean[]>(
+  const [selectedBlocks, setSelectedBlocks] = useState<boolean[]>(
     Array(48).fill(false)
   );
 

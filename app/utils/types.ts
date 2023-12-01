@@ -14,6 +14,10 @@ export interface EditorPropsTypes {
   presences: any;
 }
 
+export interface CreatePeerProps {
+  name: string;
+  type: string;
+}
 export interface ProfileStackProps {
   presences: any;
   myClientID: string;
