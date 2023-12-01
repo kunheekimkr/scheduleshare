@@ -133,6 +133,13 @@ export default function Home() {
         },
       });
 
+      // 03. create default content if not exists.
+      doc.update((root) => {
+        if (!root.content) {
+          root.content = defaultContent;
+        }
+      }, "create default content if not exists");
+
       // If initial user, delete all previous content.
       if (doc.getPresences().length == 1) {
         doc.update((root) => {
@@ -142,13 +149,6 @@ export default function Home() {
           }
         });
       }
-
-      // 03. create default content if not exists.
-      doc.update((root) => {
-        if (!root.content) {
-          root.content = defaultContent;
-        }
-      }, "create default content if not exists");
 
       // 04. subscribe doc's change event from local and remote.
       doc.subscribe((event) => {
