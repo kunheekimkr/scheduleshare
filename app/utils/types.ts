@@ -14,6 +14,33 @@ export interface EditorPropsTypes {
   presences: any;
 }
 
+export interface ProfileStackProps {
+  presences: any;
+  myClientID: string;
+}
+
+export interface TimeBlockProps {
+  selected: boolean;
+  onClick: () => void;
+  onMouseDown: () => void;
+  onMouseEnter: () => void;
+}
+
+export interface TimeSelectProps {
+  selectedBlocks: boolean[];
+  setSelectedBlocks: React.Dispatch<React.SetStateAction<boolean[]>>;
+  actions: { [name: string]: any };
+  presences: any;
+  date: string;
+}
+
+export interface CustomModalProps {
+  isOpen: boolean;
+  userName: string;
+  handleUsernameInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onModalSubmit: (isModalOpen: boolean) => void;
+}
+
 export type ChangeEventHandler = (
   event: React.ChangeEvent<HTMLInputElement>
 ) => void;

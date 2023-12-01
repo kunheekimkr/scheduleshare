@@ -1,17 +1,12 @@
 import ReactModal from "react-modal";
 import React, { useState } from "react";
-
-interface CustomModalProps {
-  isOpen: boolean;
-  userName: string;
-  handleUsernameInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onModalSubmit: (isModalOpen: boolean) => void;
-}
+import { CustomModalProps } from "../utils/types";
 
 export default function CustomModal(props: CustomModalProps) {
+  const { onModalSubmit, isOpen, userName, handleUsernameInput } = props;
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.onModalSubmit(true);
+    onModalSubmit(true);
   };
 
   return (
@@ -26,7 +21,7 @@ export default function CustomModal(props: CustomModalProps) {
           margin: "auto",
         },
       }}
-      isOpen={props.isOpen}
+      isOpen={isOpen}
     >
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -48,8 +43,8 @@ export default function CustomModal(props: CustomModalProps) {
                   className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="닉네임을 입력해 주세요"
                   type="text"
-                  value={props.userName}
-                  onChange={props.handleUsernameInput}
+                  value={userName}
+                  onChange={handleUsernameInput}
                 />
               </div>
             </div>

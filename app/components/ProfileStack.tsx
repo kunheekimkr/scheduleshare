@@ -1,13 +1,9 @@
 import Image from "next/image.js";
 import React, { useState, useEffect } from "react";
 import "../styles/style.css";
+import { ProfileStackProps } from "../utils/types";
 
 const MAX_PEER_VIEW = 4;
-
-interface ProfileStackProps {
-  presences: any;
-  myClientID: string;
-}
 
 const createPeer = (name: string, type: string) => {
   if (type == "main")
@@ -41,25 +37,24 @@ const createPeer = (name: string, type: string) => {
 };
 
 export default function ProfileStack(props: ProfileStackProps) {
+  const { presences, myClientID } = props;
   const [userName, setUserName] = useState("");
   const [otherUserNames, setOtherUserNames] = useState<Array<string>>([]);
 
   useEffect(() => {
-    // Check if props.presences is an array
-    if (Array.isArray(props.presences)) {
-      // Now you can safely use map
-      let transformed = props.presences.reduce((result, item) => {
+    if (Array.isArray(presences)) {
+      let transformed = presences.reduce((result, item) => {
         const { clientID, presence } = item;
         const { userName } = presence;
         result[clientID] = userName;
         return result;
       }, {});
 
-      setUserName(transformed[props.myClientID]);
-      delete transformed[props.myClientID];
+      setUserName(transformed[myClientID]);
+      delete transformed[myClientID];
       setOtherUserNames(Object.values(transformed));
     }
-  }, [props.presences]);
+  }, [presences]);
 
   // create list of createPeer for each otherUserNames
   const peerCount = otherUserNames.length + 2;

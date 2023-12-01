@@ -1,19 +1,5 @@
 import React from "react";
-
-interface TimeBlockProps {
-  selected: boolean;
-  onClick: () => void;
-  onMouseDown: () => void;
-  onMouseEnter: () => void;
-}
-
-interface TimeSelectProps {
-  selectedBlocks: boolean[];
-  setSelectedBlocks: React.Dispatch<React.SetStateAction<boolean[]>>;
-  actions: { [name: string]: any };
-  presences: any;
-  date: string;
-}
+import { TimeBlockProps, TimeSelectProps } from "../utils/types";
 
 const TimeBlock: React.FC<TimeBlockProps> = ({
   selected,
