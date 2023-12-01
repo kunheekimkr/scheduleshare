@@ -1,7 +1,14 @@
-/** @type {import('next').NextConfig} */
+// @ts-check
+
+/**
+ * @type {import('next').NextConfig}
+ **/
 const nextConfig = {
-  reactStrictMode: false,
   output: "export",
+  basePath: "/scheduleshare",
+  images: {
+    unoptimized: true,
+  },
 };
 
 module.exports = nextConfig;

@@ -12,7 +12,7 @@ const createPeer = (props: CreatePeerProps) => {
       <div className="peer">
         <div className="profile">
           <Image
-            src="/profile.svg"
+            src="/scheduleshare/profile.svg"
             alt="profile"
             className="profile-img"
             width={30}

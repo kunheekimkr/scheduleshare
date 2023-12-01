@@ -27,7 +27,7 @@ export default function CustomModal(props: CustomModalProps) {
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <Image
-            src="/profile.svg"
+            src="/scheduleshare/profile.svg"
             alt="profile"
             className="mx-auto"
             width={50}
