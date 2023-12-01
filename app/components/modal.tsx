@@ -1,5 +1,6 @@
 import ReactModal from "react-modal";
 import React, { FormEvent } from "react";
+import Image from "next/image";
 import { CustomModalProps } from "../utils/types";
 
 export default function CustomModal(props: CustomModalProps) {
@@ -25,10 +26,12 @@ export default function CustomModal(props: CustomModalProps) {
     >
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            className="mx-auto h-10 w-auto"
+          <Image
             src="/profile.svg"
-            alt="Your Company"
+            alt="profile"
+            className="mx-auto"
+            width={50}
+            height={50}
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             닉네임을 입력해 주세요
