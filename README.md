@@ -3,7 +3,9 @@ Code Deeply inspired by official [yorkie-js-sdk](https://github.com/yorkie-team/
 
 ## Try It Out
 
-Create .env file. Create API Key at [yorkie dashboard](https://yorkie.dev/dashboard/), or use a self-hosted yorkie server. (Check [Docks](https://yorkie.dev/docs/self-hosted-server))
+[Demo](https://kunheekimkr.github.io/scheduleshare/)
+
+Create .env file. Create API Key at [yorkie dashboard](https://yorkie.dev/dashboard/), or use a self-hosted yorkie server. (Check [Docs](https://yorkie.dev/docs/self-hosted-server))
 
 ```
 NEXT_PUBLIC_YORKIE_API_ADDR='https://api.yorkie.dev'
