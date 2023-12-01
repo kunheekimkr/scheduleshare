@@ -3,7 +3,6 @@ import yorkie, { Document, JSONArray, DocEventType } from "yorkie-js-sdk";
 import React, { use, useEffect, useState } from "react";
 import { ContentTypes, ENVtypes } from "./utils/types";
 import { parseDate } from "./utils/parseDate";
-import { displayPeers } from "./utils/handlePeers";
 import ReactModal from "react-modal";
 import Scheduler from "./components/Scheduler";
 import CustomModal from "./components/modal";
@@ -169,18 +168,25 @@ export default function Home() {
         handleUsernameInput={handleUsernameInput}
         onModalSubmit={handleModalSubmit}
       />
-      {!modalIsOpen ? (
-        <>
-          <DisplayPeerList presences={presences} myClientID={myClientID} />
-          <div className="clear-both"></div>
-          <hr className="py-2" />
-          <Scheduler
-            content={content}
-            actions={actions}
-            presences={presences}
-          />
-        </>
-      ) : null}
+      {
+        // check if content is not empty
+        !modalIsOpen && content.length != 0 ? (
+          <>
+            <DisplayPeerList presences={presences} myClientID={myClientID} />
+            <div className="clear-both"></div>
+            <hr className="py-2" />
+            <Scheduler
+              content={content}
+              actions={actions}
+              presences={presences}
+            />
+          </>
+        ) : (
+          <div className="flex items-center justify-center h-screen">
+            <div className="text-white text-4xl">Loading...</div>
+          </div>
+        )
+      }
     </main>
   );
 }
