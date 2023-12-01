@@ -58,8 +58,6 @@ export default function ProfileStack(props: ProfileStackProps) {
       setUserName(transformed[props.myClientID]);
       delete transformed[props.myClientID];
       setOtherUserNames(Object.values(transformed));
-    } else {
-      console.error("props.presences is not an array.");
     }
   }, [props.presences]);
 

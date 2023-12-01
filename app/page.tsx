@@ -133,6 +133,16 @@ export default function Home() {
         },
       });
 
+      // If initial user, delete all previous content.
+      if (doc.getPresences().length == 1) {
+        doc.update((root) => {
+          for (const item of root.content) {
+            let target = item as any;
+            root.content.deleteByID!(target.getID());
+          }
+        });
+      }
+
       // 03. create default content if not exists.
       doc.update((root) => {
         if (!root.content) {
@@ -150,6 +160,7 @@ export default function Home() {
     }
 
     attachDoc(doc, (content) => setContent(content));
+    console.log(content);
   }, [modalIsOpen]);
 
   const handleUsernameInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -168,25 +179,22 @@ export default function Home() {
         handleUsernameInput={handleUsernameInput}
         onModalSubmit={handleModalSubmit}
       />
-      {
-        // check if content is not empty
-        !modalIsOpen && content.length != 0 ? (
-          <>
-            <DisplayPeerList presences={presences} myClientID={myClientID} />
-            <div className="clear-both"></div>
-            <hr className="py-2" />
-            <Scheduler
-              content={content}
-              actions={actions}
-              presences={presences}
-            />
-          </>
-        ) : (
-          <div className="flex items-center justify-center h-screen">
-            <div className="text-white text-4xl">Loading...</div>
-          </div>
-        )
-      }
+      {!modalIsOpen ? (
+        <>
+          <DisplayPeerList presences={presences} myClientID={myClientID} />
+          <div className="clear-both"></div>
+          <hr className="py-2" />
+          <Scheduler
+            content={content}
+            actions={actions}
+            presences={presences}
+          />
+        </>
+      ) : (
+        <div className="flex items-center justify-center h-screen">
+          <div className="text-white text-4xl">Loading...</div>
+        </div>
+      )}
     </main>
   );
 }
